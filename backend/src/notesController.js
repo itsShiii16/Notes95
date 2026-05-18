@@ -4,6 +4,7 @@ const {
   createNote,
   updateNote,
   deleteNote,
+  clearNotes,
 } = require("./notesStore");
 
 function getNotes(req, res) {
@@ -62,7 +63,6 @@ function removeNote(req, res) {
 }
 
 function clearAllNotes(req, res) {
-  const { clearNotes } = require("./notesStore");
   clearNotes();
   return res.status(200).json({ message: "Notes cleared" });
 }
