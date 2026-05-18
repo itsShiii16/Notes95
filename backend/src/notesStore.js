@@ -26,8 +26,26 @@ function clearNotes() {
   nextId = 1;
 }
 
+function updateNote(id, data) {
+  const index = notes.findIndex((n) => n.id === id);
+  if (index === -1) return null;
+
+  notes[index] = { ...notes[index], ...data, id: notes[index].id };
+  return notes[index];
+}
+
+function deleteNote(id) {
+  const index = notes.findIndex((n) => n.id === id);
+  if (index === -1) return false;
+
+  notes.splice(index, 1);
+  return true;
+}
+
 module.exports = {
   getAllNotes,
   createNote,
-  clearNotes
+  updateNote,
+  deleteNote,
+  clearNotes,
 };

@@ -30,7 +30,12 @@ function validateNote(title, content, color) {
   };
 }
 
+function isValidId(id) {
+  return Number.isFinite(id) && id > 0;
+}
+
 module.exports = {
   validateNote,
-  isAllowedColor
+  isAllowedColor,
+  isValidId,
 };

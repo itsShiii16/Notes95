@@ -36,3 +36,32 @@ jobs:
 
       - name: Run backend integration tests
         run: npm run test:integration
+
+  system-tests:
+    name: System Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: npm install
+
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: npm install
+
+      - name: Install Playwright browsers
+        working-directory: frontend
+        run: npx playwright install chromium
+
+      - name: Run Playwright system tests
+        working-directory: frontend
+        run: npm run test:system
