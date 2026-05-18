@@ -4,9 +4,9 @@ notes95
 
 > A lightweight sticky note application inspired by Windows 95 UI - built with Test-Driven Development.
 
-# Live URL Placeholder
+# Live URL
 
-To be added after deployment.
+To be added after the first successful Vercel production deployment.
 
 # App Description
 
@@ -31,7 +31,7 @@ Notes are planned to be draggable locally during a session. The app will use Rea
 | Unit Testing | Jest |
 | Integration Testing | Jest + Supertest |
 | System/E2E Testing | Playwright |
-| CI/CD | GitHub Actions |
+| CI/CD | GitHub Actions + Vercel |
 
 # Data Storage Approach
 
@@ -77,22 +77,77 @@ Planned system tests:
 - User Story 2: A user can update a sticky note.
 - User Story 3: A user can delete a sticky note.
 
-# Setup Instructions Placeholder
+# Setup Instructions
 
-Setup instructions will be completed as the project is implemented.
+1. Clone the repository.
+2. Install backend dependencies:
 
-# CI/CD Setup Placeholder
+```bash
+cd backend
+npm install
+```
 
-GitHub Actions configuration will be completed after dependencies and test commands are added.
+3. Install frontend dependencies:
+
+```bash
+cd ../frontend
+npm install
+```
+
+4. Run backend unit and integration tests:
+
+```bash
+cd ../backend
+npm run test:all
+```
+
+5. Run the backend API locally:
+
+```bash
+npm start
+```
+
+6. In another terminal, run the frontend locally:
+
+```bash
+cd frontend
+npm run dev
+```
+
+7. Run Playwright system tests:
+
+```bash
+cd frontend
+npm run test:system
+```
+
+# CI/CD Setup
+
+This project uses GitHub Actions for CI/CD. The workflow runs automatically on every push and pull request to `main` and `develop`.
+
+The CI jobs install dependencies, run backend unit tests, run backend integration tests, install Playwright Chromium, and run the system tests through a real browser. This gives evidence for the Red-Green-Refactor process because Red commits should show failing workflow runs and Green commits should show passing workflow runs.
+
+Deployment is handled by Vercel. The deployment job runs only on the `main` branch and only after both test jobs pass. The workflow uses these GitHub repository secrets:
+
+- `VERCEL_TOKEN`
+- `VERCEL_ORG_ID`
+- `VERCEL_PROJECT_ID`
+
+The Vercel multi-service setup is configured in the root-level `vercel.json`. The frontend service uses the `frontend` entrypoint and is served at `/`. The backend service uses the `backend` entrypoint and is served through `/_backend`, so frontend API calls use paths such as `/_backend/api/notes`.
 
 # Test Results Placeholder
 
 ![Unit Testing with TDD](image.png)
 ![Integration Testing with TDD](image-1.png)
-# Deployment Placeholder
+![System Testing with TDD](image-2.png)
+# Vercel Deployment
 
-Deployment instructions and the live URL will be added after the application is deployed.
+The project is prepared for Vercel multi-service deployment using the root `vercel.json` file. The frontend is deployed as a Vite app, while the backend is deployed as a separate service behind the `/_backend` route prefix.
 
-# Reflection Placeholder
+After connecting the GitHub repository to Vercel, add the Vercel project values to GitHub Actions secrets, then push to `main`. If all unit, integration, and system tests pass, the deploy job publishes the production build.
 
-Reflection notes will be added after implementation, testing, and deployment are completed.
+# Reflection
+
+Writing tests before code was difficult for our pair because it forced us to decide the expected behavior before seeing a working screen or route. We had to slow down and describe what a valid note should look like, what an API response should return, and what a user should be able to do in the browser. That felt less direct than immediately building the feature, but it made the scope clearer. The Red phase also helped us see whether a failure came from missing behavior instead of a broken test setup.
+
+Working test-first changed how we designed the project. We separated note validation into utility functions so unit tests could exercise the rules without HTTP or browser setup. We kept the Express app export separate from the server startup so integration tests could send requests directly with Supertest. For the frontend, the Playwright tests pushed us to add stable `data-testid` attributes and user-focused flows for creating, editing, and deleting notes. As a pair, the process gave us a shared checklist for what was complete: a feature was not finished just because it appeared to work manually; it had to pass the test level that matched the behavior.

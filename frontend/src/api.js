@@ -1,4 +1,4 @@
-const API_BASE = "/api";
+const API_BASE = "/_backend/api";
 
 async function handleResponse(res) {
   if (!res.ok) {
