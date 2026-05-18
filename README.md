@@ -6,7 +6,7 @@ notes95
 
 # Live URL
 
-To be added after the first successful Vercel production deployment.
+[Successful Vercel Deployment Link](https://notes95.vercel.app/)
 
 # App Description
 
@@ -133,6 +133,10 @@ Deployment is handled by Vercel. The deployment job runs only on the `main` bran
 - `VERCEL_ORG_ID`
 - `VERCEL_PROJECT_ID`
 
+# Failing Pipeline Run
+![RED Unit Test for Note Validation ](image-3.png)
+![GREEN Implement app UI](image-4.png)
+
 The Vercel multi-service setup is configured in the root-level `vercel.json`. The frontend service uses the `frontend` entrypoint and is served at `/`. The backend service uses the `backend` entrypoint and is served through `/_backend`, so frontend API calls use paths such as `/_backend/api/notes`.
 
 # Test Results Placeholder
@@ -140,6 +144,7 @@ The Vercel multi-service setup is configured in the root-level `vercel.json`. Th
 ![Unit Testing with TDD](image.png)
 ![Integration Testing with TDD](image-1.png)
 ![System Testing with TDD](image-2.png)
+
 # Vercel Deployment
 
 The project is prepared for Vercel multi-service deployment using the root `vercel.json` file. The frontend is deployed as a Vite app, while the backend is deployed as a separate service behind the `/_backend` route prefix.
