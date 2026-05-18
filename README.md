@@ -88,7 +88,7 @@ GitHub Actions configuration will be completed after dependencies and test comma
 # Test Results Placeholder
 
 ![Unit Testing with TDD](image.png)
-
+![Integration Testing with TDD](image-1.png)
 # Deployment Placeholder
 
 Deployment instructions and the live URL will be added after the application is deployed.
