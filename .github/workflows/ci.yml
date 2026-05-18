@@ -11,8 +11,8 @@ on:
       - develop
 
 jobs:
-  backend-unit-tests:
-    name: Backend Unit Tests
+  backend-tests:
+    name: Backend Tests
     runs-on: ubuntu-latest
 
     defaults:
@@ -32,4 +32,7 @@ jobs:
         run: npm install
 
       - name: Run backend unit tests
-        run: npm test
+        run: npm run test:unit
+
+      - name: Run backend integration tests
+        run: npm run test:integration
