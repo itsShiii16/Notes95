@@ -1,8 +1,19 @@
 const API_BASE = "/api";
 
+async function handleResponse(res) {
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    const error = new Error(body.error || body.errors?.join(", ") || `Request failed (${res.status})`);
+    error.status = res.status;
+    throw error;
+  }
+  if (res.status === 204) return;
+  return res.json();
+}
+
 export async function getNotes() {
   const res = await fetch(`${API_BASE}/notes`);
-  return res.json();
+  return handleResponse(res);
 }
 
 export async function createNote(note) {
@@ -11,7 +22,7 @@ export async function createNote(note) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(note),
   });
-  return res.json();
+  return handleResponse(res);
 }
 
 export async function updateNote(id, data) {
@@ -20,9 +31,10 @@ export async function updateNote(id, data) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  return res.json();
+  return handleResponse(res);
 }
 
 export async function deleteNote(id) {
-  await fetch(`${API_BASE}/notes/${id}`, { method: "DELETE" });
+  const res = await fetch(`${API_BASE}/notes/${id}`, { method: "DELETE" });
+  return handleResponse(res);
 }

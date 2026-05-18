@@ -8,6 +8,7 @@ function App() {
   const [showForm, setShowForm] = useState(false);
   const [editingNote, setEditingNote] = useState(null);
   const [confirmDeleteId, setConfirmDeleteId] = useState(null);
+  const [saveError, setSaveError] = useState(null);
 
   const loadNotes = useCallback(async () => {
     try {
@@ -25,20 +26,24 @@ function App() {
   const handleNewNote = () => {
     setEditingNote(null);
     setShowForm(true);
+    setSaveError(null);
   };
 
   const handleEditNote = (note) => {
     setEditingNote(note);
     setShowForm(true);
+    setSaveError(null);
   };
 
   const handleFormClose = () => {
     setShowForm(false);
     setEditingNote(null);
+    setSaveError(null);
   };
 
   const handleSave = async (noteData) => {
     try {
+      setSaveError(null);
       if (editingNote) {
         await updateNote(editingNote.id, noteData);
       } else {
@@ -48,7 +53,7 @@ function App() {
       setEditingNote(null);
       await loadNotes();
     } catch (err) {
-      console.error("Failed to save note", err);
+      setSaveError(err.message);
     }
   };
 
@@ -78,6 +83,7 @@ function App() {
         showForm={showForm}
         editingNote={editingNote}
         confirmDeleteId={confirmDeleteId}
+        saveError={saveError}
         onNewNote={handleNewNote}
         onEditNote={handleEditNote}
         onSave={handleSave}

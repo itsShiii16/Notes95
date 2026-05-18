@@ -7,7 +7,7 @@ const COLORS = [
   { name: "pink", hex: "#f8bbd0" },
 ];
 
-function NoteForm({ note, onSubmit }) {
+function NoteForm({ note, onSubmit, error }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [color, setColor] = useState("yellow");
@@ -64,6 +64,8 @@ function NoteForm({ note, onSubmit }) {
           />
         ))}
       </div>
+
+      {error && <p className="form-error">{error}</p>}
 
       <button
         data-testid="note-submit-button"

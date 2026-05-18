@@ -7,6 +7,7 @@ function Desktop({
   showForm,
   editingNote,
   confirmDeleteId,
+  saveError,
   onNewNote,
   onEditNote,
   onSave,
@@ -47,7 +48,7 @@ function Desktop({
                 &times;
               </button>
             </div>
-            <NoteForm note={editingNote} onSubmit={onSave} />
+            <NoteForm note={editingNote} onSubmit={onSave} error={saveError} />
           </div>
         </div>
       )}

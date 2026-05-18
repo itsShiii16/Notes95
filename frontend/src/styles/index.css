@@ -219,6 +219,17 @@ html, body, #root {
   border-color: #808080 #fff #fff #808080;
 }
 
+/* Error message */
+
+.form-error {
+  color: #cc0000;
+  font-size: 13px;
+  margin-bottom: 10px;
+  padding: 6px 8px;
+  background: #ffe0e0;
+  border: 1px solid #cc0000;
+}
+
 .btn-primary {
   padding: 6px 20px;
   font-size: 14px;
