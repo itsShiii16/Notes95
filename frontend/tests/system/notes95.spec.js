@@ -1,5 +1,10 @@
 import { test, expect } from "@playwright/test";
 
+// Clear all notes before each test so they start with a clean state
+test.beforeEach(async ({ request }) => {
+  await request.post("http://localhost:5000/api/notes/clear");
+});
+
 // User Story 1: Create
 // As a user, I want to create a new sticky note on the desktop,
 // so that I can quickly jot down a thought.
@@ -71,12 +76,8 @@ test.describe("User Story 3: Delete a sticky note", () => {
     // Click the delete button on the note
     await page.click('[data-testid="note-delete-button"]');
 
-    // Confirm deletion if there's a confirmation dialog
-    // (test handles both with and without confirmation)
-    const confirmDialog = page.locator('[data-testid="confirm-delete-button"]');
-    if (await confirmDialog.isVisible()) {
-      await confirmDialog.click();
-    }
+    // Confirm deletion dialog
+    await page.click('[data-testid="confirm-delete-button"]');
 
     // Verify the note is no longer displayed
     await expect(page.locator('[data-testid="note-card"]')).toHaveCount(0);

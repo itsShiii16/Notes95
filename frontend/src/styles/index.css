@@ -10,4 +10,260 @@ html, body, #root {
   height: 100%;
   width: 100%;
   overflow: hidden;
+  font-family: "Segoe UI", "Arial", sans-serif;
+  font-size: 14px;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Desktop */
+
+.desktop-canvas {
+  flex: 1;
+  background: #008080;
+  padding: 16px;
+  position: relative;
+  overflow-y: auto;
+}
+
+.desktop-toolbar {
+  margin-bottom: 16px;
+}
+
+.new-note-btn {
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #fff #808080 #808080 #fff;
+  padding: 6px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.new-note-btn:active {
+  border-color: #808080 #fff #fff #808080;
+}
+
+/* Notes grid */
+
+.notes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* Sticky note */
+
+.sticky-note {
+  width: 220px;
+  min-height: 160px;
+  padding: 12px;
+  border: 1px solid #808080;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  position: relative;
+  word-wrap: break-word;
+}
+
+.sticky-note:hover {
+  filter: brightness(0.95);
+}
+
+.delete-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #808080;
+  background: #c0c0c0;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-btn:active {
+  border-color: #808080 #fff #fff #808080;
+}
+
+.note-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  padding-right: 20px;
+}
+
+.note-content {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* Overlay */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.window {
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #fff #808080 #808080 #fff;
+  min-width: 320px;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.window-titlebar {
+  background: #000080;
+  color: #fff;
+  padding: 4px 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.window-close {
+  background: #c0c0c0;
+  border: 1px solid;
+  border-color: #fff #808080 #808080 #fff;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* Form */
+
+.note-form {
+  padding: 16px;
+}
+
+.field {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.field input,
+.field textarea {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 4px 6px;
+  border: 2px solid;
+  border-color: #808080 #fff #fff #808080;
+  font-size: 14px;
+  font-family: inherit;
+  background: #fff;
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+/* Color picker */
+
+.color-picker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.color-btn {
+  width: 28px;
+  height: 28px;
+  border: 2px solid;
+  border-color: #fff #808080 #808080 #fff;
+  cursor: pointer;
+}
+
+.color-btn.selected {
+  border-color: #808080 #fff #fff #808080;
+  outline: 2px solid #000;
+}
+
+/* Buttons */
+
+.btn {
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #fff #808080 #808080 #fff;
+  padding: 4px 14px;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.btn:active {
+  border-color: #808080 #fff #fff #808080;
+}
+
+.btn-primary {
+  padding: 6px 20px;
+  font-size: 14px;
+}
+
+/* Confirm dialog */
+
+.confirm-dialog {
+  text-align: center;
+  padding: 20px;
+}
+
+.confirm-dialog p {
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* Taskbar */
+
+.taskbar {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  background: #c0c0c0;
+  border-top: 2px solid #fff;
+  padding: 0 4px;
+  gap: 8px;
+}
+
+.taskbar-start {
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #fff #808080 #808080 #fff;
+  padding: 2px 10px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.taskbar-title {
+  font-size: 13px;
+  color: #333;
 }

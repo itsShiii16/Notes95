@@ -61,9 +61,16 @@ function removeNote(req, res) {
   return res.status(204).send();
 }
 
+function clearAllNotes(req, res) {
+  const { clearNotes } = require("./notesStore");
+  clearNotes();
+  return res.status(200).json({ message: "Notes cleared" });
+}
+
 module.exports = {
   getNotes,
   addNote,
   editNote,
   removeNote,
+  clearAllNotes,
 };
