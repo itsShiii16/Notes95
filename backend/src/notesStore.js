@@ -1,7 +1,33 @@
+let notes = [];
+let nextId = 1;
+
+function getAllNotes() {
+  return notes;
+}
+
+function createNote(noteData) {
+  const note = {
+    id: nextId,
+    title: noteData.title,
+    content: noteData.content,
+    color: noteData.color,
+    x: noteData.x ?? 0,
+    y: noteData.y ?? 0
+  };
+
+  notes.push(note);
+  nextId += 1;
+
+  return note;
+}
+
 function clearNotes() {
-  throw new Error("Not implemented");
+  notes = [];
+  nextId = 1;
 }
 
 module.exports = {
+  getAllNotes,
+  createNote,
   clearNotes
 };
